@@ -4,7 +4,7 @@
 #include "Headers/ModMenu.hpp"
 #include "Include/zygisk.hpp"
 
-#define TARGET_PACKAGE std::string("com.tencent.ig")
+#define GamePackageName "com.tencent.ig"
 
 using zygisk::Api;
 using zygisk::AppSpecializeArgs;
@@ -40,8 +40,8 @@ private:
     JNIEnv *env{};
     bool enableHack{};
 
-    void preSpecialize(const char *packageName) {
-        if (std::string(packageName) != TARGET_PACKAGE) {
+    void preSpecialize(const char *package_name) {
+        if (strcmp(package_name, GamePackageName) == 0) {
             api->setOption(zygisk::Option::DLCLOSE_MODULE_LIBRARY);
             return;
         }
